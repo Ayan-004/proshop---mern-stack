@@ -57,6 +57,10 @@ table th {
   color: inherit; /* Optional: keeps the original text color */
 }
 
+.text-black {
+  color: black;
+}
+
 .montserrat {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
