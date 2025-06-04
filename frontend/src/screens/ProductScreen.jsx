@@ -19,7 +19,7 @@ const ProductScreen = () => {
   }, [productId]);
 
   if (!product || Object.keys(product).length === 0) {
-    return <div>Loading product...</div>;
+    return <div className="montserrat" >Loading product...</div>;
   }
 
   return (
