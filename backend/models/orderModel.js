@@ -60,19 +60,19 @@ const orderSchema = new mongoose.Schema(
     paymentResult: {
       id: {
         type: String,
-        required: true,
+        // required: true,
       },
       status: {
         type: String,
-        required: true,
+        // required: true,
       },
       update_time: {
         type: String,
-        required: true,
+        // required: true,
       },
       email_address: {
         type: String,
-        required: true,
+        // required: true,
       },
     },
     itemsPrice: {
