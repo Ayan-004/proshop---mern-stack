@@ -8,13 +8,12 @@ import {
   ListGroup,
   Image,
   Card,
-  ListGroupItem,
 } from "react-bootstrap";
 import { toast } from "react-toastify";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { useCreateOrderMutation } from "../slices/ordersSlice";
+import { useCreateOrderMutation } from "../slices/ordersApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
 
 const PlaceOrderScreen = () => {
@@ -78,7 +77,7 @@ const PlaceOrderScreen = () => {
               ) : (
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item>
+                    <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
                           <Image
