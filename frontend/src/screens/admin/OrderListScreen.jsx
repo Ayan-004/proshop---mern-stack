@@ -10,13 +10,13 @@ const OrderListScreen = () => {
   console.log(orders);
   return (
     <>
-      <h1>Orders</h1>
+      <h1 className="montserrat">Orders</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Table striped hover responsive className="table-sm">
+        <Table striped hover responsive className="table-sm montserrat">
           <thead>
             <tr>
               <th>ID</th>
