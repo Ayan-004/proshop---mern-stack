@@ -84,12 +84,17 @@ const OrderScreen = () => {
     toast.error(err.message);
   }
   function createOrder(data, actions) {
+    const inrAmount = order?.totalPrice || 0;
+    const exchangeRate = 85.76;
+    const usdAmount = (inrAmount / exchangeRate).toFixed(2);
+
     return actions.order
       .create({
         purchase_units: [
           {
             amount: {
-              value: order.totalPrice,
+              value: usdAmount,
+              currency_code: "USD"
             },
           },
         ],
@@ -169,7 +174,7 @@ const OrderScreen = () => {
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
                     <Col md={4}>
-                      {item.qty} x ${item.price} = ${item.qty * item.price}
+                      {item.qty} x ₹{item.price.toLocaleString('en-IN')} = ₹{(item.qty * item.price).toLocaleString('en-IN')}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -187,22 +192,22 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>₹{order.itemsPrice.toLocaleString('en-IN')}</Col>
                 </Row>
 
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>₹{order.shippingPrice.toLocaleString('en-IN')}</Col>
                 </Row>
 
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>₹{order.taxPrice.toLocaleString('en-IN')}</Col>
                 </Row>
 
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>₹{order.totalPrice.toLocaleString('en-IN')}</Col>
                 </Row>
               </ListGroup.Item>
 

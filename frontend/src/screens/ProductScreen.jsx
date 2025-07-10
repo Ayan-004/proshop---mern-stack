@@ -61,7 +61,7 @@ const ProductScreen = () => {
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Price: ${product?.price}
+                  Price: ₹{product?.price.toLocaleString('en-IN')}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
@@ -76,7 +76,7 @@ const ProductScreen = () => {
                       <Col>Price:</Col>
                       <Col>
                         <strong>
-                          ${product?.price}
+                          ₹{product?.price.toLocaleString('en-IN')}
                         </strong>
                       </Col>
                     </Row>
