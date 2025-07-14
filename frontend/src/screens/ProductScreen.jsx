@@ -1,32 +1,69 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Form, Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Form,
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Button,
+  Card,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { addToCart } from '../slices/cartSlice'
-import { useGetProductDetailsQuery } from "../slices/productApiSlice";
+import { toast } from "react-toastify";
+import { addToCart } from "../slices/cartSlice";
+import {
+  useGetProductDetailsQuery,
+  useCreateReviewMutation,
+} from "../slices/productApiSlice";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   const {
     data: product,
     isLoading,
+    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
 
+  const [createReview, { isLoading: loadingProductReview }] =
+    useCreateReviewMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
   const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }))
-    navigate('/cart')
-  }
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await createReview({
+        productId,
+        rating,
+        comment,
+      }).unwrap();
+      refetch();
+      toast.success("Review Submitted");
+      setRating(0);
+      setComment("");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <>
@@ -37,7 +74,9 @@ const ProductScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error?.data?.message || error.error}</Message>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <Row className="montserrat">
@@ -61,7 +100,7 @@ const ProductScreen = () => {
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Price: ₹{product?.price.toLocaleString('en-IN')}
+                  Price: ₹{product?.price.toLocaleString("en-IN")}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
@@ -76,7 +115,7 @@ const ProductScreen = () => {
                       <Col>Price:</Col>
                       <Col>
                         <strong>
-                          ₹{product?.price.toLocaleString('en-IN')}
+                          ₹{product?.price.toLocaleString("en-IN")}
                         </strong>
                       </Col>
                     </Row>
@@ -106,15 +145,17 @@ const ProductScreen = () => {
 
                         <Col>
                           <Form.Control
-                            as='select'
+                            as="select"
                             value={qty}
                             onChange={(e) => setQty(Number(e.target.value))}
                           >
-                            {[...Array(product.countInStock).keys()].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                { x + 1 }
-                              </option>
-                            ))}
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
                           </Form.Control>
                         </Col>
                       </Row>
@@ -133,6 +174,67 @@ const ProductScreen = () => {
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
+            </Col>
+          </Row>
+          <Row className="review montserrat">
+            <Col md={6}>
+              <h2>Reviews</h2>
+              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              <ListGroup variant="flush">
+                {product.reviews.map((review) => (
+                  <ListGroup.Item key={review._id}>
+                    <strong>{review.name}</strong>
+                    <Rating value={review.rating} />
+                    <p>{review.createdAt.substring(0, 10)}</p>
+                    <p>{review.comment}</p>
+                  </ListGroup.Item>
+                ))}
+                <ListGroup.Item>
+                  <h2>Write a Customer Review</h2>
+
+                  {loadingProductReview && <Loader />}
+
+                  {userInfo ? (
+                    <Form onSubmit={submitHandler}>
+                      <Form.Group controlId="rating" className="my-2">
+                        <Form.Label>Rating</Form.Label>
+                        <Form.Control
+                          as="select"
+                          value={rating}
+                          onChange={(e) => setRating(Number(e.target.value))}
+                        >
+                          <option value="">Select</option>
+                          <option value="1">Poor</option>
+                          <option value="2">Fair</option>
+                          <option value="3">Good</option>
+                          <option value="4">Very Good</option>
+                          <option value="5">Excellent</option>
+                        </Form.Control>
+                      </Form.Group>
+                      <Form.Group controlId="comment" className="my-2">
+                        <Form.Label>Comment</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          row="3"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                        ></Form.Control>
+                      </Form.Group>
+                      <Button
+                        disabled={loadingProductReview}
+                        type="submit"
+                        variant="primary"
+                      >
+                        Submit
+                      </Button>
+                    </Form>
+                  ) : (
+                    <Message>
+                      Please <Link to="/login">sign in</Link> to write a review{" "}
+                    </Message>
+                  )}
+                </ListGroup.Item>
+              </ListGroup>
             </Col>
           </Row>
         </>
