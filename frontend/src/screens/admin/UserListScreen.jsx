@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate";
 import { FaCheck, FaEdit, FaTimes, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -10,7 +12,9 @@ import {
 } from "../../slices/usersApiSlice";
 
 const UserListScreen = () => {
-  const { data: users, refetch, isLoading, error } = useGetUsersQuery();
+  const { pageNumber } = useParams();
+
+  const { data, refetch, isLoading, error } = useGetUsersQuery({pageNumber});
 
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
@@ -35,6 +39,7 @@ const UserListScreen = () => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
+        <>
         <Table striped hover responsive className="table-sm montserrat">
           <thead>
             <tr>
@@ -47,7 +52,7 @@ const UserListScreen = () => {
           </thead>
 
           <tbody>
-            {users.map((user) => (
+            {data.users.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
@@ -79,6 +84,8 @@ const UserListScreen = () => {
             ))}
           </tbody>
         </Table>
+        <Paginate pages={data.pages} page={data.page} isAdmin={true} isUserList={true}></Paginate>
+        </>
       )}
     </>
   );
