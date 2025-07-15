@@ -6,6 +6,7 @@ import logo from "../assets/logo.png";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { Link } from "react-router-dom";
+import SearchBox from "../screens/SearchBox";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -44,6 +45,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nab">
             <Nav className="ms-auto">
+              <SearchBox />
               <Nav.Link as={Link} to="/cart">
                 <FaShoppingCart className="me-1 mb-1" />
                 Cart
