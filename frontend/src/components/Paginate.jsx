@@ -7,6 +7,7 @@ const Paginate = ({
   isAdmin = false,
   isUserList = false,
   isOrderList = false,
+  keyword = "",
 }) => {
   return (
     pages > 1 && (
@@ -18,7 +19,9 @@ const Paginate = ({
             as={Link}
             to={
               !isAdmin
-                ? `/page/${x + 1}`
+                ? keyword
+                  ? `/search/${keyword}/page/${x + 1}`
+                  : `/page/${x + 1}`
                 : isUserList
                 ? `/admin/userlist/${x + 1}`
                 : isOrderList
