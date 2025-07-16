@@ -1,13 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Button,
-  Image,
-  ListGroup,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, Button, Image, ListGroup, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
@@ -94,7 +87,7 @@ const OrderScreen = () => {
           {
             amount: {
               value: usdAmount,
-              currency_code: "USD"
+              currency_code: "USD",
             },
           },
         ],
@@ -106,7 +99,7 @@ const OrderScreen = () => {
 
   const deliverOrderHandler = async () => {
     try {
-      await deliverOrder({orderId});
+      await deliverOrder({ orderId });
       refetch();
       toast.success("Order delivered");
     } catch (err) {
@@ -140,7 +133,7 @@ const OrderScreen = () => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
-              {loadingDeliver && <Loader/>}
+              {loadingDeliver && <Loader />}
               {order.isDelivered ? (
                 <Message variant="success">
                   Delivered on {order.deliveredAt}
@@ -175,7 +168,8 @@ const OrderScreen = () => {
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
                     <Col md={4}>
-                      {item.qty} x ₹{item.price.toLocaleString('en-IN')} = ₹{(item.qty * item.price).toLocaleString('en-IN')}
+                      {item.qty} x ₹{item.price.toLocaleString("en-IN")} = ₹
+                      {(item.qty * item.price).toLocaleString("en-IN")}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -193,22 +187,22 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>₹{order.itemsPrice.toLocaleString('en-IN')}</Col>
+                  <Col>₹{order.itemsPrice.toLocaleString("en-IN")}</Col>
                 </Row>
 
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>₹{order.shippingPrice.toLocaleString('en-IN')}</Col>
+                  <Col>₹{order.shippingPrice.toLocaleString("en-IN")}</Col>
                 </Row>
 
                 <Row>
                   <Col>Tax</Col>
-                  <Col>₹{order.taxPrice.toLocaleString('en-IN')}</Col>
+                  <Col>₹{order.taxPrice.toLocaleString("en-IN")}</Col>
                 </Row>
 
                 <Row>
                   <Col>Total</Col>
-                  <Col>₹{order.totalPrice.toLocaleString('en-IN')}</Col>
+                  <Col>₹{order.totalPrice.toLocaleString("en-IN")}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -220,12 +214,6 @@ const OrderScreen = () => {
                     <Loader />
                   ) : (
                     <div>
-                      <Button
-                        onClick={onApproveTest}
-                        style={{ marginBottom: "10px" }}
-                      >
-                        Test Pay Order
-                      </Button>
                       <div>
                         <PayPalButtons
                           createOrder={createOrder}

@@ -18,7 +18,7 @@ const ProductCarousel = () => {
             <Image src={product.image} alt={product.name} fluid className="rounded-5" />
             <Carousel.Caption className="carousel-caption rounded-bottom-5">
               <h2>
-                {product.name} (${product.price})
+                {product.name} (₹{product.price.toLocaleString('en-IN')})
               </h2>
             </Carousel.Caption>
           </Link>
