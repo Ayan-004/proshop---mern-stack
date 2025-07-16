@@ -60,7 +60,7 @@ const OrderScreen = () => {
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
-        await payOrder({ orderId, details });
+        await payOrder({ orderId, details }).unwrap();
         refetch();
         toast.success("Payment successful");
       } catch (err) {
@@ -73,7 +73,7 @@ const OrderScreen = () => {
   }
   function createOrder(data, actions) {
     const inrAmount = order?.totalPrice || 0;
-    const exchangeRate = 85.76;
+    const exchangeRate = 85.98;
     const usdAmount = (inrAmount / exchangeRate).toFixed(2);
 
     return actions.order
@@ -105,7 +105,7 @@ const OrderScreen = () => {
   return isLoading ? (
     <Loader />
   ) : error ? (
-    <Message variant="danger" />
+    <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
     <>
       <h1 className="montserrat">Order {order._id}</h1>

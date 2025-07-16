@@ -94,7 +94,7 @@ const ProductEditScreen = () => {
           <Loader />
         ) : error ? (
           <Message variant="danger">
-            {error?.data?.message || error.error}
+            {error.data.message}
           </Message>
         ) : (
           <Form onSubmit={submitHandler} className="montserrat">
