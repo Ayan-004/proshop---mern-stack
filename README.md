@@ -29,7 +29,6 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 - PayPal SDK (for payments)
 - Multer (for file uploads)
 - dotenv
-- Morgan (for logging)
 
 ---
 
