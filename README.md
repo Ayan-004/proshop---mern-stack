@@ -118,6 +118,4 @@ npm run data:destroy
 ## ✍️ Author
 
 **Ayan Shaikh**  
-🌐 Portfolio: [Protfolio website](https://ayancreates.netlify.app/)  
-💼 LinkedIn: [linkedin.com/in/ayan-shaikh](https://www.linkedin.com/in/ayan-shaikh-3659a0289/)  
-💻 GitHub: [github.com/Ayan-004](https://github.com/Ayan-004)
+🔗 [Portfolio](https://ayancreates.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/ayan-shaikh-3659a0289/) | [GitHub](https://github.com/Ayan-004)
