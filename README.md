@@ -64,5 +64,59 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 ```bash
 git clone https://github.com/Ayan-004/proshop---mern-stack.git
 cd proshop---mern-stack
+```
 
-###2. Install Backend 
+###2. Install Dependencies
+
+```bash
+//Backend
+cd backend
+npm install
+
+//Frontend
+cd ../frontend
+npm install
+```
+
+##🔐 Environment Variables
+```bash
+NODE_ENV=development
+PORT=5000
+MONGO_URI=your_mongo_connection_string
+JWT_SECRET=your_jwt_secret
+PAYPAL_CLIENT_ID=your_paypal_client_id
+```
+
+##🚀 Running the App
+Run both frontend and backend:
+
+```bash
+# From root folder
+npm run dev
+```
+
+Frontend runs on: http://localhost:3000
+
+Backend API runs on: http://localhost:5000
+
+##🌱 Seed the Database
+
+```bash
+# Import sample data
+npm run data:import
+
+# Destroy all data
+npm run data:destroy
+```
+
+## 📤 Deployment
+
+- **Frontend**: Deployed with **Render**
+- **Backend**: Deployed with **Render**
+- **Database**: Hosted on **MongoDB Atlas**
+
+## ✍️ Author
+Ayan Shaikh
+🌐 Portfolio
+💼 LinkedIn
+💻 GitHub
