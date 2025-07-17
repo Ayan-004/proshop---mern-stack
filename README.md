@@ -66,7 +66,7 @@ git clone https://github.com/Ayan-004/proshop---mern-stack.git
 cd proshop---mern-stack
 ```
 
-###2. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 //Backend
@@ -78,7 +78,7 @@ cd ../frontend
 npm install
 ```
 
-##🔐 Environment Variables
+## 🔐 Environment Variables
 ```bash
 NODE_ENV=development
 PORT=5000
@@ -87,7 +87,7 @@ JWT_SECRET=your_jwt_secret
 PAYPAL_CLIENT_ID=your_paypal_client_id
 ```
 
-##🚀 Running the App
+## 🚀 Running the App
 Run both frontend and backend:
 
 ```bash
@@ -95,11 +95,11 @@ Run both frontend and backend:
 npm run dev
 ```
 
-Frontend runs on: http://localhost:3000
+- Frontend runs on: http://localhost:3000
 
-Backend API runs on: http://localhost:5000
+- Backend API runs on: http://localhost:5000
 
-##🌱 Seed the Database
+## 🌱 Seed the Database
 
 ```bash
 # Import sample data
@@ -116,7 +116,8 @@ npm run data:destroy
 - **Database**: Hosted on **MongoDB Atlas**
 
 ## ✍️ Author
-Ayan Shaikh
-🌐 Portfolio
-💼 LinkedIn
-💻 GitHub
+
+**Ayan Shaikh**  
+🌐 Portfolio: [Protfolio website](https://ayancreates.netlify.app/)  
+💼 LinkedIn: [linkedin.com/in/ayan-shaikh](https://www.linkedin.com/in/ayan-shaikh-3659a0289/)  
+💻 GitHub: [github.com/Ayan-004](https://github.com/Ayan-004)
