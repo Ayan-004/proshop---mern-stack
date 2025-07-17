@@ -16,7 +16,6 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 - React
 - Redux Toolkit
 - React Router
-- Axios
 - Bootstrap
 
 ### 🔙 Backend
