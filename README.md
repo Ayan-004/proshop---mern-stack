@@ -16,7 +16,6 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 - React
 - Redux Toolkit
 - React Router
-- Axios
 - Bootstrap
 
 ### 🔙 Backend
@@ -30,7 +29,6 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 - PayPal SDK (for payments)
 - Multer (for file uploads)
 - dotenv
-- Morgan (for logging)
 
 ---
 
@@ -52,9 +50,14 @@ A full-featured **E-Commerce web application** built with the **MERN stack** (Mo
 
 ## 📸 Screenshots
 
-> You can add screenshots by placing images in a `screenshots/` folder and linking them like this:
+### 🛒 Homepage
+![Homepage](frontend/public/images/HomePage.png)
 
+### 🧾 Product Page
+![Product Page](frontend/public/images/ProductPage.png)
 
+### 📦 Order Page
+![Order Page](frontend/public/images/OrderPage.png)
 ---
 
 ## 🛠 Installation
